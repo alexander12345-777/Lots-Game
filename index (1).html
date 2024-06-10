@@ -1,0 +1,31 @@
+// script.js
+document.getElementById('drawButton').addEventListener('click', drawLots);
+
+function drawLots() {
+    const names = ["Kaprisha", "Anass", "Marloes", "Christel"];
+    const lots = [2, 3, 4];
+
+    // Randomly shuffle the remaining lots
+    lots.sort(() => Math.random() - 0.5);
+
+    const assignments = {
+        "Kaprisha": 1
+    };
+
+    let index = 0;
+    for (let i = 1; i < names.length; i++) {
+        assignments[names[i]] = lots[index++];
+    }
+
+    displayResults(assignments);
+}
+
+function displayResults(assignments) {
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = "";  // Clear previous results
+    for (const [name, lot] of Object.entries(assignments)) {
+        const p = document.createElement('p');
+        p.textContent = `${name}: Lot ${lot}`;
+        resultDiv.appendChild(p);
+    }
+}
